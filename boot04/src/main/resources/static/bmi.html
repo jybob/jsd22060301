@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bmi测试</title>
+</head>
+<body>
+<h1>bmi测试</h1>
+<div>
+<input type="text" v-model="h" placeholder="请填入你的身高(m)">
+<input type="text" v-model="w" placeholder="请输入你的体重(kg)">
+<input type="button" value="计算bmi" @click="f1()">
+<h2>测试结果:{{result}}</h2>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+
+<script>
+    let v = new Vue({
+        el: "body>div",
+        data: {
+            result:"",
+            h: "",
+            w: ""
+        },
+        methods: {
+            f1(){
+                let bmi={height:v.h,weight:v.w}
+                axios.post("/multi",bmi).then(function (response) {
+                    v.result=response.data;
+
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>
